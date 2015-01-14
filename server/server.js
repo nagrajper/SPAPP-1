@@ -1,12 +1,12 @@
 var express = require('express');
-var db = require("mongojs").connect('SPAPP', ['groups', 'subgroups']);
+//var db = require("mongojs").connect('SPAPP', ['groups', 'subgroups']);
 var app = express();
 
 
 // display Welcome message on homepage
-app.get('/', function(req, res){
-	res.send('Welcome to SPAPP');
-});
+// app.get('/', function(req, res) {
+// 	res.send('Welcome to SPAPP');
+// });
 
 app.get('/groups', function(req, res){
 	
@@ -63,6 +63,14 @@ app.get('/add/group/:groupId/subgroup/:subgroupName', function(req, res) {
 		});
 
 	res.send('Added new subgroup');
+});
+
+app.get('*', function(req, res) {
+	if (req.url == '/spapp.js') {
+		 res.sendFile(req.url,	{'root': '__dirname/../frontend'});
+	} else {
+		res.sendFile('index.html',	{'root': '__dirname/../frontend'});
+	}	
 });
 
 // server listens on port 8000
