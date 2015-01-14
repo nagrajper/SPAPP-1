@@ -7,8 +7,19 @@
 		<script type="text/javascript" src="./spapp.js"></script>
 	</head>
 
-	<body ng-controller="SPAPPController">
+	<body>
+		<div ng-controller="SPAPPController">
 		Welcome to {{ siteName }} (Single Page APP)
+		</div>
+		
+		<displayhierarchy></displayhierarchy>
+		<div ng-controller="ResultsController">
+			
+			<div ng-repeat="i in result">
+				{{ i }}
+			</div>
+
+		</div>
 	</body>
 
 </html>

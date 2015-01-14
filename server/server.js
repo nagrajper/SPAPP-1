@@ -1,5 +1,5 @@
 var express = require('express');
-//var db = require("mongojs").connect('SPAPP', ['groups', 'subgroups']);
+var db = require("mongojs").connect('SPAPP', ['groups', 'subgroups']);
 var app = express();
 
 
@@ -9,7 +9,7 @@ var app = express();
 // });
 
 app.get('/groups', function(req, res){
-	
+	console.log('Fetching groups');
 	db.groups.find({}, function(err, docs) {
 		var result={}; 
 		var docsLength = docs.length;
