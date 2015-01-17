@@ -1,10 +1,17 @@
 var app = angular.module('SPAPP', ['ngRoute']);
 
-app.config(function ($routeProvider){
-	$routeProvider.when('/', {
-		controller: 'SPAPPController'
+app.config(['$routeProvider', function ($routeProvider){
+	$routeProvider.when('/', {		
+		//templateUrl: 'templates/listGroups.html',
+		templateUrl: 'templates/groupAdd.html',
+		controller: 'ResultsController'
+	}).when('/groupAdd', {
+		
+		controller: 'groupAddController'
+	}).otherwise({
+		redirectTo: '/errorPage'
 	});
-});
+}]);
 
 app.directive('displayhierarchy', function () {
 	return {
@@ -14,12 +21,13 @@ app.directive('displayhierarchy', function () {
 	};
 }); 
 
-app.controller('SPAPPController', function ($scope) {
+/*app.controller('SPAPPController', function ($scope) {
+	console.log('in SPAPPController');
 	$scope.siteName = 'SPAPP';
 }); 
-
-app.controller('ResultsController', function ($scope, $http) {
-	console.log('RESULT');
+*/
+app.controller('ResultsController', function ($scope, $http, $location) {
+	console.log('in ResultsController');
 	var result = '';
 	$http.get('groups').success(function(data) {
 		// data = {	"54b2293967e1a0d417fafc2b":"Arts",
@@ -37,4 +45,31 @@ app.controller('ResultsController', function ($scope, $http) {
 	$http.get('subgroups').success(function(data) {
 		$scope.subgroups = data;
 	});
+
+	$scope.addNewGroup = function() {
+		$http.get('/add/group/' + $scope.groupName).success(function(data) {		
+			console.log('HI');
+
+			$http.get('groups').success(function(data) {
+				$scope.groups = data;
+				console.log('HELLO' + $scope.groups);
+				$location.url('/');
+			});			
+		});		
+	}
 });
+/*
+app.controller('groupAddController', function ($scope, $location, $http) {
+	console.log('in groupAddController');
+	$scope.addNewGroup = function() {
+		$http.get('/add/group/' + $scope.groupName).success(function(data) {		
+			console.log('HI');
+
+			$http.get('groups').success(function(data) {
+				$scope.groups = data;
+				console.log('HELLO' + $scope.groups);
+				$location.url('/');
+			});			
+		});		
+	}
+});*/

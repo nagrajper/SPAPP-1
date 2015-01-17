@@ -1,0 +1,27 @@
+Welcome to {{ siteName }} (Single Page APP)
+<table border="1">
+				
+	<thead>
+		<tr>
+			<th>Group</th><th>SubGroup</th><th></th>
+		</tr>
+	</thead>
+
+
+	<tr ng-repeat="(id, name) in groups">
+		<td>
+			<a href="#" id="{{ id }}">{{ name }}</a>
+		</td>
+		<td>
+			<div ng-show="subgroups[id]">
+				<div ng-repeat="sName in subgroups[id]">
+				{{ sName }}
+				</div>
+			</div>
+		</td>
+		<td>
+			<a href="#" id="{{ id }}">Add Subgroup</a>				
+		</td>
+	</tr>
+
+</table>

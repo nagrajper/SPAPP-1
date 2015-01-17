@@ -66,9 +66,12 @@ app.get('/add/group/:groupId/subgroup/:subgroupName', function(req, res) {
 });
 
 app.get('*', function(req, res) {
+	console.log('Requested URL: ' + req.url);
 	if (req.url == '/spapp.js') {
 		 res.sendFile(req.url,	{'root': '__dirname/../frontend'});
-	} else {
+	} else if (!(req.url.match(/^\/templates/)== null) || !(req.url.match(/^\/lib/)== null)) {
+		 res.sendFile(req.url,	{'root': '__dirname/../frontend'});
+	}else {
 		res.sendFile('index.html',	{'root': '__dirname/../frontend'});
 	}	
 });
