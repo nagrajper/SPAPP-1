@@ -12,11 +12,16 @@
 		Welcome to {{ siteName }} (Single Page APP)
 		</div>
 		
-		<displayhierarchy></displayhierarchy>
+		<displayhierarchy></displayhierarchy>		
 		<div ng-controller="ResultsController">
 			
-			<div ng-repeat="i in result">
-				{{ i }}
+			<div ng-repeat="(id, name) in groups">
+				<a href="#" id="{{ id }}">{{ name }}</a>
+				<div ng-show="subgroups[id]">
+					<div ng-repeat="sName in subgroups[id]">
+				----{{ sName }}
+				</div>
+				</div>
 			</div>
 
 		</div>

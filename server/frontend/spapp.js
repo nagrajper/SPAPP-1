@@ -30,6 +30,11 @@ app.controller('ResultsController', function ($scope, $http) {
 			//result += '<div id="' + i + '">' + data[i]+ '</div>';
 			result += data[i];
 		}*/
-		$scope.result = data;
+		$scope.groups = data;
+	});
+
+	// fetch subgroups
+	$http.get('subgroups').success(function(data) {
+		$scope.subgroups = data;
 	});
 });
