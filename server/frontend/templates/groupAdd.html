@@ -9,7 +9,7 @@
 
 <tr ng-repeat="(id, name) in groups">
 	<td>
-		<a href="#" id="{{ id }}">{{ name }}</a>
+		{{ name }}
 	</td>
 	<td>
 		<div ng-show="subgroups[id]">
@@ -19,14 +19,15 @@
 		</div>
 	</td>
 	<td>
-		<a href="#" id="{{ id }}">Add Subgroup</a>				
+		<a href="#/addSubgroup/{{id}}" id="{{ id }}">Add Subgroup</a>			
 	</td>
 </tr>
 
 </table>
 
-<a href="#/groupAdd">Add Group</a> 	
+<a href="#/" ng-click="showAddGroupForm()">Add Group  </a> 	
 
-<div>Add new group</div>
+<div ng-show="groupFormShown">Add new group
 <input ng-model="groupName"/>
 <button ng-click="addNewGroup()">Add</button>
+</div>

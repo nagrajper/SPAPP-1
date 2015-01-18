@@ -2,13 +2,12 @@ var express = require('express');
 var db = require("mongojs").connect('SPAPP', ['groups', 'subgroups']);
 var app = express();
 
-
 // display Welcome message on homepage
 // app.get('/', function(req, res) {
 // 	res.send('Welcome to SPAPP');
 // });
 
-app.get('/groups', function(req, res){
+app.get('/groups', function(req, res) {
 	console.log('Fetching groups');
 	db.groups.find({}, function(err, docs) {
 		var result={}; 
