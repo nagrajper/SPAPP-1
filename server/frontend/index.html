@@ -2,6 +2,9 @@
 <html ng-app="SPAPP">
 	
 	<head>
+	<link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/style.css">
 	<script type="text/javascript" src="/lib/angular.js"></script>
 		<script type="text/javascript" src="/lib/angular-route.js"></script>
 		<script type="text/javascript" src="./spapp.js"></script>
@@ -9,11 +12,16 @@
 
 	<body>
 		<!-- <div ng-controller="SPAPPController"></div> -->
-		Welcome to {{ siteName }} (Single Page APP)
-		<displayhierarchy></displayhierarchy>		
-		<div ng-controller="ResultsController">
-		
-		<div ng-view></div>
+		<div class="container">
+			<div ng-controller="ResultsController">
+			<header>
+				<h1>{{ siteName }} (Single Page APP) </h1>
+			</header>
+				<displayhierarchy></displayhierarchy>	
+
+				
+				<div ng-view></div>
+			</div>
 		</div>
 		
 	</body>

@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider){
 app.directive('displayhierarchy', function () {
 	return {
 		restrict: 'E',
-		template: '<div>Fetch data from DB here</div>',
+		template: '<div>List of Groups and Subgroups</div>',
 		replace: true
 	};
 }); 
@@ -32,6 +32,7 @@ app.controller('ResultsController', function ($scope, $http, $location) {
 	console.log('in ResultsController');
 	var result = '';
 
+	$scope.siteName = 'SPAPP';
 	// fetch groups
 	$http.get('groups').success(function(data) {
 		// data = {	"54b2293967e1a0d417fafc2b":"Arts",
