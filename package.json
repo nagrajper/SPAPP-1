@@ -1,0 +1,15 @@
+{
+  "name" : "MEAN",
+  "description" : "MEAN",
+  "version" : "0.0.3",
+  "repository" :
+  { "type" : "git"
+  , "url" : "http://github.com/npm/npm.git"
+  },
+  "dependencies" : {
+    "express" : "~4.10.7",
+    "body-parser": "~1.8.0",
+    "ejs": "~1.0.0",
+    "express-session": "~1.7.6"
+  }
+}
