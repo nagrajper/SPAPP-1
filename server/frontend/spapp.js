@@ -23,11 +23,7 @@ app.directive('displayhierarchy', function () {
 	};
 }); 
 
-/*app.controller('SPAPPController', function ($scope) {
-	console.log('in SPAPPController');
-	$scope.siteName = 'SPAPP';
-}); 
-*/
+
 app.controller('ResultsController', function ($scope, $http, $location) {
 	console.log('in ResultsController');
 	var result = '';
