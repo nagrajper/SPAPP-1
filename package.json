@@ -6,10 +6,14 @@
   { "type" : "git"
   , "url" : "http://github.com/npm/npm.git"
   },
-  "dependencies" : {
-    "express" : "~4.10.7",
+  "dependencies": {
+    "express": "~4.8.8",
+    "morgan": "~1.3.0",
+    "compression": "~1.0.11",
     "body-parser": "~1.8.0",
+    "method-override": "~2.2.0",
     "ejs": "~1.0.0",
-    "express-session": "~1.7.6"
-  }
+    "express-session": "~1.7.6",
+    "mongodb": "~1.4.30",
+    }
 }

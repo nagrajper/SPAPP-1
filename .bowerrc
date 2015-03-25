@@ -1,0 +1,6 @@
+{
+  "directory": "public/lib",
+  "proxy":"http://gabc1.persistent.co.in:8080",
+  "https-proxy":"http://gabc1.persistent.co.in:8080",
+  "strict-ssl": false
+}

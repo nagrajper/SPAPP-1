@@ -35,6 +35,7 @@
 	<div class="text">Add new group</div>
 	<input ng-model="groupName" class="form-control"/>
 	<button ng-click="addNewGroup()" class="btn btn-default">Add</button>
+	<div ng-show="duplication" class="bg-warning text-warning">Group Already Exist. Please add new group</div>
 </div>
 </div>	
 

@@ -1,0 +1,6 @@
+<div id="subGroupForm" ng-controller="subGroupAddController">
+	<input class="form-control"  type="text" ng-model="subGroupName"/>
+	<button ng-click="addSubGroup()" class="btn btn-default">
+	Add Subgroup</button>
+	<div ng-show="subduplication" class="bg-warning text-warning">Subgroup Already Exists. Please add new Subgroup</div>
+</div>

@@ -1,0 +1,45 @@
+
+Welcome to {{ siteName }} (Single Page APP)
+<div id="no-more-tables"  class="table-responsive">
+<table class=" table table-striped table-bordered table-hover" ng-show="groups">
+						
+<thead>
+	<tr>
+		<th>Group</th><th>SubGroup</th><th></th>
+	</tr>
+</thead>
+
+
+<tr ng-repeat="(id, name) in groups">
+	<td>
+		{{ name }}
+	</td>
+	<td>
+		<div ng-show="subgroups[id]">
+			<div ng-repeat="sName in subgroups[id]">
+			{{ sName }}
+			</div>
+		</div>
+	</td>
+	<td>
+		<a href="#/addSubgroup/{{id}}" id="{{ id }}" class="btn btn-default">Add Subgroup</a>			
+	</td>
+</tr>
+
+</table>
+</div>
+
+<div class="footer">
+<a href="#/" ng-click="showAddGroupForm()" class="btn btn-default">
+	Add Group
+</a> 
+<div ng-show="groupFormShown" class="add-new-group_wrap">
+	<div class="text">Add new group</div>
+	<input ng-model="groupName" class="form-control"/>
+	<button ng-click="addNewGroup()" class="btn btn-default">Add</button>
+	<div ng-show="duplication" class="bg-warning text-warning">Group Already Exist. Please add new group</div>
+</div>
+</div>	
+
+
+

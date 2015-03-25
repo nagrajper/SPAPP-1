@@ -15,6 +15,18 @@ app.config(['$routeProvider', function ($routeProvider){
 	});	
 }]);
 
+app.service('sharedService', function (){
+	var subGroups = {};
+	return {
+		getSubGroups: function () {
+			return subGroups;
+		},
+		setSubGroups: function(value) {
+			subGroups = value;
+		}
+	};
+});
+
 app.directive('displayhierarchy', function () {
 	return {
 		restrict: 'E',
@@ -24,7 +36,7 @@ app.directive('displayhierarchy', function () {
 }); 
 
 
-app.controller('ResultsController', function ($scope, $http, $location) {
+app.controller('ResultsController', function ($scope, $http, $location, sharedService) {
 	console.log('in ResultsController');
 	var result = '';
 
@@ -40,19 +52,33 @@ app.controller('ResultsController', function ($scope, $http, $location) {
 	// fetch subgroups
 	$http.get('subgroups').success(function(data) {
 		$scope.subgroups = data;
+		sharedService.setSubGroups($scope.subgroups);
 	});
+	
 
 	// save a new group
 	$scope.addNewGroup = function() {
-		$http.get('/add/group/' + $scope.groupName).success(function(data) {		
-			console.log('HI');
+		$scope.duplication = false;
+		// prevent duplication
+		for(var gname in $scope.groups) {
+			console.log($scope.groupName + ' ' + $scope.groups[gname]);
+			if($scope.groupName.toLowerCase() == $scope.groups[gname].toLowerCase())  {
+				console.log('Duplicate detected');
+				var duplication = true;
+				$scope.duplication = true;
+				break;
+			}			
+		}
+				
+		if(!duplication) {
+			$http.get('/add/group/' + $scope.groupName).success(function(data) {		
+				console.log('HI');
 
-			$http.get('groups').success(function(data) {
-				$scope.groups = data;
-				console.log('HELLO' + $scope.groups);
-				$location.url('/');
-			});			
-		});		
+				$http.get('groups').success(function(data) {
+					$scope.groups = data;					
+				});			
+			});
+		}
 	}
 
 	// show add group form
@@ -64,23 +90,40 @@ app.controller('ResultsController', function ($scope, $http, $location) {
 	
 });
 
-app.controller('subGroupAddController', function ($scope, $http, $routeParams, $location) { 
+app.controller('subGroupAddController', function ($scope, $http, $routeParams, $location,sharedService) { 
 	console.log('in subGroupAddController');
 	$scope.groupId = $routeParams.groupId;
 	// save subgroup for a group
 	$scope.addSubGroup = function ($routeParams) {
-		//$scope.groupId = $routeParams.groupId;
+		// prevent duplication of subgroups. (check case sensitivity)
+		$scope.subduplication = false;
+		var subGroups = sharedService.getSubGroups();
+		for(var id in subGroups) {
+			if(subGroups.hasOwnProperty(id)){
+				var len = subGroups[id].length;
+				for (var i=0; i < len; i++) {
+					if (subGroups[id][i].toLowerCase() == $scope.subGroupName.toLowerCase()) {
+						$scope.subduplication = true;
+						break;
+					}
+				}				
+			}
+		}
 
-		console.log('Attempt to add ' 
-			+ $scope.subGroupName + ' for Group: ' + $scope.groupId );
+		if(!$scope.subduplication) {
+			console.log('Attempt to add ' 
+				+ $scope.subGroupName + ' for Group: ' + $scope.groupId );
 
-		$http.get('/add/group/' + $scope.groupId + '/subgroup/' + $scope.subGroupName)
-		.success(function() {
-			console.log('Subgroup added');
-			$location.url('/');
-		});
+			$http.get('/add/group/' + $scope.groupId + '/subgroup/' + $scope.subGroupName)
+			.success(function() {
+				console.log('Subgroup added');
+				$location.url('/');
+			});
+		}
 	}
 });
+
+
 
 /*
 app.controller('groupAddController', function ($scope, $location, $http) {

@@ -22,7 +22,7 @@ app.get('/groups', function(req, res) {
 });
 
 app.get('/subgroups', function(req, res) {
-	
+	console.log('Fetching subgroups');
 	db.subgroups.find({}, function(err, docs) {
 		var result={}; 
 		var docsLength = docs.length;
